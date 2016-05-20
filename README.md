@@ -7,4 +7,4 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Teen taloyhtiölleni saunavarausjärjestelmän. Tarkoituksena on, että jokainen talon asunto kykenee varaamaan, muokkaamaan ja perumaan varauksiaan, sekä näkemään saunan varaustilanteen tulevaisuudessa.

@@ -1,0 +1,12 @@
+Tarkoituksena siirtää saunavarausjärjestelmä sähköiseksi.
+
+Mahdollistetaan asukkaiden saunanvaraus sekä varaustilanteen tutkiminen.
+Tavoitteena mahdollistaa kunkin taloyhtiön asukkaan saunanvaraus omalla asuntokohtaisella tilillään, sekä  varauskalenterin jo tehtyjen 
+varausten tutkiminen.
+
+Nämä tiedot saa yleensä tehtäväkuvauksesta, kirjoita kuitenkin omin sanoin.
+Users.cs, php.
+
+Selaimen ei alustavasti tarvitse tukea mitään tiettyä ohjelmointikieltä.
+
+PostqreSQL

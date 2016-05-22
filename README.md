@@ -2,8 +2,8 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni]http://tuosalme.users.cs.helsinki.fi/tsohasaunapp/)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](http://tuosalme.users.cs.helsinki.fi/tsohasaunapp/)
+* [Linkki dokumentaatiooni](https://github.com/Merloni/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 

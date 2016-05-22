@@ -10,3 +10,56 @@ Users.cs, php.
 Selaimen ei alustavasti tarvitse tukea mitään tiettyä ohjelmointikieltä.
 
 PostqreSQL
+
+
+
+
+
+Käyttötapaukset
+
+
+Käyttäjäryhmät
+
+
+Jokamies
+  Jokamiehellä tarkoitetaan ketä tahansa, joka Internetin välityksellä tulee saunavarausappin sivuille.
+
+Asukas
+  Asukas on rekisteröitynyt käyttäjä taloyhtiön asukki.
+
+Admin
+  Admin on asukas, joka hallinnoi järjestelmän toimintaa
+  .
+Käyttötapauskuvaukset
+
+Käyttötapauksella tarkoitetaan järjestelmän avulla hoidettavaa tavoitteellista tehtäväkokonaisuutta. 
+Esimerkiksi tilauksen kirjaus, tilauksen peruutus ja laskun tulostus ovat tehtäväkokonaisuuksia, 
+joita on luonnollista mallintaa käyttötapauksina. Tärkeimmistä käyttötapauksesta kuvataan sen sisältö: mitä käyttötapauksessa tehdään. 
+Raporttien kohdalta kerrotaan, mitä tietoja raporttiin sisältyy.
+
+Käyttötapausten avulla määritellään, mitä järjestelmällä tehdään. Voit luonnostella käyttötapauksia esimerkkitapausten avulla. 
+Esimerkkitapauksessa toiminnan kohde on kiinnitetty. Esimerkiksi ‘ilmoittautuminen Informaatiojärjestelmät kurssin 
+harjoitusryhmään 3’ on esimerkkitapaus käyttötapauksesta ‘luentokurssille ilmoittautuminen’. 
+Voit esittää esimerkkitapauksia myös dokumentissa havainnollistaaksesi käyttötapauksia. 
+Käyttötapaukset kannattaa esittää käyttäjittäin ryhmiteltynä tärkeysjärjestyksessä.
+
+Sisällöltään ilmeisimpiä käyttötapauksia kuten kirjautumista ja rekisteröimistä ei tarvitse kuvailla, riittää että ne luettelee.
+
+
+Jokamiehen käyttötapaukset
+
+Etusivun lukeminen:
+  Kuka tahansa voi käydä lukemassa etusivulla olevia yleistietoja, mutta kirjautuminen ja rekisteröityminen on 
+  mahdollistettu vain talon asukkaille. 
+
+Asukkaan käyttötapaukset
+
+Saunakalenterin selailu:
+  Asukkaat voivat selata sivulla olevaa kalenteria ja tutkia, mitkä ajat ovat varattuja tai vapaita.
+  
+Ajan varaus:
+  Asukkaat voivat varata vapaina olevia saunavuoroja kalenterin kautta.
+  
+
+
+Muita käyttötapauksia: rekisteröityminen, kirjautuminen

@@ -9,7 +9,6 @@ CREATE TABLE Reservation(
 	id SERIAL PRIMARY KEY,
 	apartment_id INTEGER REFERENCES Apartment(id),
 	reserved boolean DEFAULT FALSE,
-	reservehour time,
-	reserved date
+	reservehour time
 
 );

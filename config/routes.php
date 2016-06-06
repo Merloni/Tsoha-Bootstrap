@@ -1,8 +1,9 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    ReservationController::index();
   });
+
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
@@ -19,4 +20,13 @@
   });
   $routes->get('/edit_reservation', function(){
   	HelloWorldController::editReservation();
+  });
+  $routes->get('/reservation/:id', function($id){
+    ReservationController::show($id);
+  });
+  $routes->post('/reservation', function(){
+    ReservationController::store();
+  });
+  $routes->get('/reservation/new', function(){
+    ReservationController::create();
   });

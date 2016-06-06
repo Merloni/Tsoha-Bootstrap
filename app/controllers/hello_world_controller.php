@@ -1,5 +1,7 @@
 <?php
 
+
+  require 'app/models/reservation.php';
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -8,6 +10,13 @@
     }
 
     public static function sandbox(){
+      
+      $asd = Reservation::find(1);
+      $reservations = Reservation::all();
+
+      Kint::dump($asd);
+      Kint::dump($reservations);
+    
       // Testaa koodiasi täällä
       View::make('helloworld.html');
     }

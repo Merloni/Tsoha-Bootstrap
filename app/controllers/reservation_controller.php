@@ -11,11 +11,11 @@ class ReservationController extends BaseController{
 
 	}
 	public static function show($id){
+		$reservation = Reservation::find($id);	
 
-		$reservation = Reservation::find($id);
+		$apartment = Apartment::find($reservation->apartment_id);
 
-		View::make('reservation/show.html', array('reservation' => $reservation));
-
+		View::make('reservation/show.html', array('reservation' => $reservation, 'apartment' => $apartment));
 	}
 	public static function create(){
 
@@ -24,6 +24,7 @@ class ReservationController extends BaseController{
 	}
 	public static function edit($id){
 		$reservation = Reservation::find($id);
+
 		View::make('reservation/edit.html', array('attributes' => $reservation));
 	}
 	public static function update($id){

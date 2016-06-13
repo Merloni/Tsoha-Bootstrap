@@ -44,16 +44,41 @@ class Reservation extends BaseModel{
 		}
 		return null;
 	}
+
 	public function save(){
 
-    $query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
+    	$query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
 
-    $query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
+    	$query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
 
-    $row = $query->fetch();
+    	$row = $query->fetch();
     
-    $this->id = $row['id'];
-  }
+    	$this->id = $row['id'];
+
+  	}
+  	public function update(){
+
+  		$query = DB::connection()->prepare('UPDATE Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
+
+  		$query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
+
+    	$row = $query->fetch();
+    
+    	$this->id = $row['id'];
+
+  	}
+  	public function destroy(){
+
+  		$query = DB::connection()->prepare('DELETE Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
+
+  		$query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
+
+    	$row = $query->fetch();
+    
+    	$this->id = $row['id'];
+
+  	}
+
 
 	
 

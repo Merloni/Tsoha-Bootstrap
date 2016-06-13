@@ -14,6 +14,7 @@
           <td><a href="{{base_path}}/reservation/{{reservation.id}}">{{reservation.apartment_id}}</td>
 
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/reservation/{{reservation.id}}/edit">Muokkaa</a></td>
+          <td><a class="btn btn-danger" href="{{base_path}}/reservation/{{reservation.id}}/destroy">Poista</a></td>
         </tr>
       {% endfor %}
     </tbody>

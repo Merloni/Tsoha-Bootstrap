@@ -7,7 +7,6 @@ class Reservation extends BaseModel{
 	public function __construct($attributes){
 		parent::__construct($attributes);
 	}
-
 	public static function all(){
 		$query = DB::connection()->prepare('SELECT * FROM Reservation');
 
@@ -28,7 +27,9 @@ class Reservation extends BaseModel{
 	}
 	public static function find($id){
 		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE id = :id LIMIT 1');
+
 		$query->execute(array('id' => $id));
+
 		$row = $query->fetch();
 
 		if($row){
@@ -44,9 +45,10 @@ class Reservation extends BaseModel{
 		return null;
 	}
 	public function save(){
+
     $query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
-    
-    $query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservedhour));
+
+    $query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
 
     $row = $query->fetch();
     

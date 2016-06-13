@@ -10,5 +10,6 @@ CREATE TABLE Reservation(
 	apartment_id INTEGER REFERENCES Apartment(id),
 	reserved boolean DEFAULT FALSE,
 	reservehour time
-
 );
+
+

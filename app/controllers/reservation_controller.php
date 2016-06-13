@@ -55,12 +55,12 @@ class ReservationController extends BaseController{
 
     
     	Redirect::to('/reservation/' . $reservation->id, array('message' => 'Varaus tehty!'));
-  }
-  public static function destroy($id){
-  	$reservation = new Reservation(array('id' => $id));
-  	$reservation->destroy();
+  	}
+  	public static function destroy($id){
+  		$reservation = new Reservation(array('id' => $id));
+  		$reservation->destroy();
 
-  	Redirect::to('/reservation', array('message' => 'Poistettu'));
+  		Redirect::to('/reservation', array('message' => 'Poistettu'));
 
-  }
+  	}
 }

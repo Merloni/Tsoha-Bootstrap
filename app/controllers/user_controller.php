@@ -8,7 +8,7 @@ class UserController extends BaseController{
 	public static function handle_login(){
 		$params = $_POST;
 
-		$user = User::authenticate($params[''])
+		$user = User::authenticate($params['']);
 	}
 
 

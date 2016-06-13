@@ -69,7 +69,7 @@ class Reservation extends BaseModel{
   	}
   	public function destroy(){
 
-  		$query = DB::connection()->prepare('DELETE Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
+  		$query = DB::connection()->prepare('DELETE FROM Reservation (apartment_id, reserved, reservehour) VALUES (:apartment_id, :reserved, :reservehour) RETURNING id');
 
   		$query->execute(array('apartment_id' => $this->apartment_id, 'reserved' => $this->reserved, 'reservehour' => $this->reservehour));
 

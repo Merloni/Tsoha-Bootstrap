@@ -51,7 +51,7 @@ class Reservation extends BaseModel{
 
 	public function save(){
 
-    	$query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, sauna_id, reserved, reservestart, reserve_end) VALUES (:apartment_id, :reserved, :reservestart, :reserve_end) RETURNING id');
+    	$query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, sauna_id, reserved, reservestart, reserve_end) VALUES (:apartment_id, :sauna_id, :reserved, :reservestart, :reserve_end) RETURNING id');
 
     	$query->execute(array('apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
 

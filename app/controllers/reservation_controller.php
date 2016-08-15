@@ -49,7 +49,11 @@ class ReservationController extends BaseController{
     	$params = $_POST;
     
     	$reservation = new Reservation(array(
-      		'apartment_id' => $params['apartment_id']
+      		'apartment_id' => $params['apartment_id'],
+      		'sauna_id' => $params['sauna_id'],
+      		'reserved' => $params['reserved'],
+      		'reservestart' => $params['reservestart'],
+      		'reserve_end' => $params['reserve_end']
     	));
 
     	$reservation->save();

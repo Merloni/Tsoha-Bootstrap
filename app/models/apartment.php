@@ -2,7 +2,7 @@
 
 class Apartment extends BaseModel{
 
-	public $id, $name, $password;
+	public $id, $loginname, $surname, $password;
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -11,7 +11,7 @@ class Apartment extends BaseModel{
 	public static function all(){
 		$query = DB::connection()->prepare('SELECT * FROM Apartment');
 
-		$query.execute();
+		$query->execute();
 
 		$rows = $query->fetchAll();
 		$apartments = array();
@@ -19,7 +19,8 @@ class Apartment extends BaseModel{
 		foreach($rows as $row){
 			$apartments[] = new Apartment(array(
 				'id' => $row['id'],
-				'name' => $row['name'],
+				'loginname' => $row['loginname'],
+				'surname' => $row['surname'],
 				'password' => $row['password']
 				));
 		}
@@ -27,13 +28,16 @@ class Apartment extends BaseModel{
 	}
 	public static function find($id){
 		$query = DB::connection()->prepare('SELECT * FROM Apartment WHERE id = :id LIMIT 1');
+
 		$query->execute(array('id'=> $id));
+		
 		$row = $query->fetch();
 
 		if($row){
 			$apartment = new Apartment(array(
 				'id'=> $row['id'],
-				'name'=> $row['name'],
+				'loginname' => $row['loginname'],
+				'surname'=> $row['surname'],
 				'password'=> $row['password']
 				));
 

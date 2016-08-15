@@ -4,8 +4,9 @@
 class ApartmentController extends BaseController{
 
 	public static function index(){
+		$apartments = Apartment::all();
 
-		View::make('apartmentment/index.html');
+		View::make('apartment/index.html', array('apartments' => $apartments));
 	}
 
 	

@@ -12,10 +12,11 @@ class ReservationController extends BaseController{
 	}
 	public static function show($id){
 		$reservation = Reservation::find($id);	
+		
 
 		$apartment = Apartment::find($reservation->apartment_id);
 
-		View::make('reservation/show.html', array('reservation' => $reservation, 'apartment' => $apartment));
+		View::make('reservation/show.html', compact('reservation', 'apartment'));
 	}
 	public static function create(){
 

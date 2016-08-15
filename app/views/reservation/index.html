@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>Varaukset</h1>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        <th>Huoneisto</th>
+        <th>Huoneiston id</th>
+        <th>Saunan id</th>
+        <th>Varaustilanne(saatan poistaa tämän attribuutin, tuntuu atm hieman turhalta)</th>
+        <th>Varauksen alkuaika</th>
+        <th>Varauksen loppaika</th>
       </tr>
     </thead>
 
     <tbody>
       {% for reservation in reservations %}
         <tr>
-          <td><a href="{{base_path}}/reservation/{{reservation.id}}">{{reservation.apartment_id}}</td>
-
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/reservation/{{reservation.id}}/edit">Muokkaa</a></td>
-          <td>
-            <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/destroy">
-              <button type="submit" class="btn btn-danger">Poista</button>
-            </form>
-          </td>
+          <td>{{reservation.apartment_id}}</td>
+          <td>{{reservation.sauna_id}}</td>
+          <td>{{reservation.reserved}}</td>
+          <td>{{reservation.reservestart}}</td>
+          <td>{{reservation.reserve_end}}</td>
         </tr>
       {% endfor %}
     </tbody>

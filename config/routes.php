@@ -37,3 +37,9 @@
   $routes->post('/login', function(){
     UserContoller::handle_login();
   });
+
+  #ApartmentRoutes
+
+  $routes->get('/apartments', function(){
+    ApartmentController::index();
+  });

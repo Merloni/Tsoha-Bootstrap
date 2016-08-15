@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Huoneisto</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for aparment in aparments %}
+        <tr>
+          <td>{{apartment.surname}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

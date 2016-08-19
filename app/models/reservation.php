@@ -82,6 +82,13 @@ class Reservation extends BaseModel{
     	$this->id = $row['id'];
 
   	}
+  	public function reservedtostring(){
+  		if ($this->reserved){
+  			return "Varattu";
+  		} else {
+  			return "Vapaa";
+  		}
+  	}
 
 
 	

@@ -35,31 +35,47 @@ class ReservationController extends BaseController{
 		$attributes = array(
 			'id' => $id,
 			'apartment_id' => $params['apartment_id'],
+			'sauna_id' =>  $params['sauna_id'],
 			'reserved' => $params['reserved'],
-			'reservehour' => $params['reservehour']
+			'reservestart' => $params['reservestart'],
+			'reserve_end' => $params['reserve_end']
 		);
 
 		$reservation = new Reservation($attributes);
-		$reservation ->update();
-		Redirect::to('/reservation/' . $reservation->id, array('message' => 'Muokattu onnistuneesti'));
+		$errors = $reservation->errors();
+		if(count($errors) > 0){
+			View::make('reservation/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+		}else{
+			$reservation ->update();
+			Redirect::to('/reservation/' . $reservation->id, array('message' => 'Muokattu onnistuneesti'));
+		}
+		
 
 	}
 	public static function store(){
     
     	$params = $_POST;
-    
-    	$reservation = new Reservation(array(
+
+    	$attributes = array(
       		'apartment_id' => $params['apartment_id'],
       		'sauna_id' => $params['sauna_id'],
       		'reserved' => $params['reserved'],
       		'reservestart' => $params['reservestart'],
       		'reserve_end' => $params['reserve_end']
-    	));
+    	);
+    	$reservation = New Reservation($attributes);
 
-    	$reservation->save();
+    	$errors = $reservation->errors();
+
+    	if (count($errors) == 0) {
+    		$reservation->save();
+    		Redirect::to('/reservation/' . $reservation->id, array('message' => 'Varaus tehty!'));
+    	}else{
+    		View::make('reservation/new.html', array('errors' => $errors, 'attributes' => $attributes));
+  		}
 
     
-    	Redirect::to('/reservation/' . $reservation->id, array('message' => 'Varaus tehty!'));
+    	
   	}
   	public static function destroy($id){
   		$reservation = new Reservation(array('id' => $id));

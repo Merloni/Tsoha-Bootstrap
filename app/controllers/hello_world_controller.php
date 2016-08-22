@@ -11,14 +11,30 @@
 
     public static function sandbox(){
       
-      $asd = Reservation::find(1);
-      $reservations = Reservation::all();
+      $asd = new Reservation(array(
+        'apartment_id' => '1',
+        'sauna_id' => '2',
+        'reserved' => false,
+        'reservestart' => '14:00',
+        'reserve_end' => '13:00'
+        ));
 
-      Kint::dump($asd);
-      Kint::dump($reservations);
-    
-      // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      $errors = $asd->errors();
+
+      Kint::dump($errors);
+
+      $asd = new Reservation(array(
+        'apartment_id' => '1',
+        'sauna_id' => '2',
+        'reserved' => false,
+        'reservestart' => '',
+        'reserve_end' => ''
+        ));
+
+      $errors = $asd->errors();
+
+      Kint::dump($errors);
+
     }
 
     public static function reservation(){

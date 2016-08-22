@@ -1,6 +1,10 @@
 <?php
 
 
+  $routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
+  });
+
 #ReservationRoutes
 
   $routes->get('/', function() {

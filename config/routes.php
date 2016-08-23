@@ -13,6 +13,9 @@ i<?php
   $routes->get('/reservation', function() {
     ReservationController::index();
   });
+  $routes->get('/reservations', function(){
+    ReservationController::index();
+  });
   $routes->post('/reservation', function(){
     ReservationController::store();
   });
@@ -44,4 +47,7 @@ i<?php
 
   $routes->get('/apartments', function(){
     ApartmentController::index();
+  });
+  $routes->get('/logout', function(){
+    ApartmentController::logout();
   });

@@ -9,7 +9,12 @@ class ApartmentController extends BaseController{
 		View::make('apartment/index.html', array('apartments' => $apartments));
 	}
 	public static function login(){
-		View::make('apartment/login.html');
+		if(isset($_SESSION['user'])){
+			Redirect::to('/', array('message' => 'Olet jo kirjautuneena sisään'));
+		} else{
+			View::make('apartment/login.html');	
+		}
+		
 	}
 	
 	public static function handle_login(){
@@ -25,6 +30,15 @@ class ApartmentController extends BaseController{
 			$_SESSION['user'] = $apartment->id;
 
 			Redirect::to('/', array('message' => 'Hei ' . $apartment->surname . '!'));
+		}
+	}
+	public static function logout(){
+		if (isset($_SESSION['user'])){
+			$_SESSION['user'] = null;
+
+			Redirect::to('/', array('message' => 'Onnistunut uloskirjaus'));
+		}else{
+			Redirect::to('/');
 		}
 	}
 

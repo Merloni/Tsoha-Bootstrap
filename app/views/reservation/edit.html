@@ -1,1 +1,43 @@
-miksei näy
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa varausta</h1>
+  {% import "macros/forms.html" as forms %}
+
+    {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/edit">
+    <div class="form-group">
+      <label>Apartment id</label>
+      <input type="number" name="apartment_id" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Saunan id</label>
+      <input type="number" name="sauna_id" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Varattu(turha ominaisuus, muutan myöhemmin) </label>
+      <input type="boolean" name="reserved" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Varauksen alku</label>
+      <input type="time" name="reservestart" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Varauksen loppu</label>
+      <input type="time" name="reserve_end" class="form-control">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+    
+  </form>
+{% endblock %}

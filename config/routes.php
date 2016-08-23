@@ -1,4 +1,4 @@
-<?php
+i<?php
 
 
   $routes->get('/hiekkalaatikko', function() {
@@ -33,16 +33,14 @@
   });
 
 
-  #UserRoutes
+  #ApartmentRoutes
 
   $routes->get('/login', function(){
-    UserController::login();
+    ApartmentController::login();
   });
   $routes->post('/login', function(){
-    UserContoller::handle_login();
+    ApartmentController::handle_login();
   });
-
-  #ApartmentRoutes
 
   $routes->get('/apartments', function(){
     ApartmentController::index();

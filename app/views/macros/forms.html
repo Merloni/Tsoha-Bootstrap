@@ -1,0 +1,10 @@
+{% macro post_button(action, text) %}
+  <form method="post" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
+  </form>
+{% endmacro %}
+{% macro get_button(action, text) %}
+  <form method="get" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-info">{{text|default('Edit')}}</button>
+  </form>
+{% endmacro %}

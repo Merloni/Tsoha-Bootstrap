@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% import "macros/forms.html" as forms %}
 <h1>Yksittäisen varauksen sivu</h1>
 <table class="table table-striped table-bordered">
     <thead>
@@ -23,8 +24,8 @@
         </tr>
     </tbody>
   </table>
-  <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/destroy" style="display: inline-block;">
-  <button type="submit" class="btn btn-danger">Poista</button>
+    {{forms.get_button("#{base_path}/reservation/#{reservation.id}/edit")}}
+    {{forms.post_button("#{base_path}/reservation/#{reservation.id}/destroy")}}
 </form>
 
 

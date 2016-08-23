@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  
-  {error}
-
   <h1>Kirjaudu sisään</h1>
 
   <form method="post" action="{{base_path}}/login">
     <div class="form-group">
       <label>Asunto</label>
-      <input type="text" class="form-control" name="loginname" value="{{loginname}}">
+      <input type="text" class="form-control" name="loginname">
     </div>
 
     <div class="form-group">

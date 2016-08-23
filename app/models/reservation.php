@@ -63,24 +63,21 @@ class Reservation extends BaseModel{
   	}
   	public function update(){
 
-  		$query = DB::connection()->prepare('UPDATE Reservation (apartment_id, sauna_id, reserved, reservestart, reserve_end) VALUES (:apartment_id, :reserved, :reservestart, :reserve_end) RETURNING id');
+  		$query = DB::connection()->prepare('UPDATE Reservation SET apartment_id = :apartment_id, sauna_id = :sauna_id, reserved = :reserved, reservestart = :reservestart, reserve_end = :reserve_end WHERE id = :id RETURNING id');
 
-  		$query->execute(array('apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
+      $query->execute(array('id' => $this->id, 'apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
 
-    	$row = $query->fetch();
+      $row = $query->fetch();
     
-    	$this->id = $row['id'];
+      $this->id = $row['id'];
 
   	}
   	public function destroy(){
 
-  		$query = DB::connection()->prepare('DELETE FROM Reservation (apartment_id, sauna_id, reserved, reservestart, reserve_end) VALUES (:apartment_id, :sauna_id, :reserved, :reservestart, :reserve_end) RETURNING id');
+  		$query = DB::connection()->prepare('DELETE FROM Reservation WHERE id = :id');
 
-  		$query->execute(array('apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
+  		$query->execute(array('id' => $this->id));
 
-    	$row = $query->fetch();
-    
-    	$this->id = $row['id'];
 
   	}
   	public function reservedtostring(){

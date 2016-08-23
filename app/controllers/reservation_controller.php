@@ -26,7 +26,7 @@ class ReservationController extends BaseController{
 	public static function edit($id){
 		$reservation = Reservation::find($id);
 
-		View::make('reservation/edit.html', array('attributes' => $reservation));
+		View::make('reservation/edit.html', array('reservation' => $reservation));
 	}
 	public static function update($id){
 		$params = $_POST;

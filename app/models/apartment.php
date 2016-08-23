@@ -45,6 +45,25 @@ class Apartment extends BaseModel{
 		}
 		return null;
 	}
+	public static function authenticate($loginname, $password){
+		$query = DB::connection()->prepare('SELECT * FROM Apartment WHERE loginname = :loginname AND password = :password LIMIT 1');
+		$query->execute(array('loginname' => $loginname, 'password' => $password));
+
+		$row = $query->fetch();
+
+		if($row){
+			$apartment = new Apartment(array(
+				'id' => $row['id'],
+				'loginname' => $row['loginname'],
+				'surname' => $row['surname'],
+				'password' => $row['password']));
+
+			return $apartment;
+
+		}else{
+			return null;
+		}
+	}
 	
 
 }

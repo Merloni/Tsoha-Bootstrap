@@ -22,7 +22,7 @@ class ApartmentController extends BaseController{
 		if(!$apartment){
 			View::make('apartment/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'loginname' => $params['loginname']));
 		}else{
-			$_SESSION['apartment'] = $apartment->id;
+			$_SESSION['user'] = $apartment->id;
 
 			Redirect::to('/', array('message' => 'Hei ' . $apartment->surname . '!'));
 		}

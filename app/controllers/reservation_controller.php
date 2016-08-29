@@ -4,6 +4,7 @@ class ReservationController extends BaseController{
 	
 	
 	public static function index(){
+		self::check_logged_in();
 
 		$reservations = Reservation::all();
 
@@ -11,6 +12,7 @@ class ReservationController extends BaseController{
 
 	}
 	public static function show($id){
+		self::check_logged_in();
 		$reservation = Reservation::find($id);	
 		
 
@@ -19,16 +21,21 @@ class ReservationController extends BaseController{
 		View::make('reservation/show.html', compact('reservation', 'apartment'));
 	}
 	public static function create(){
+		self::check_logged_in();
 
 		View::make('reservation/new.html');
 
 	}
 	public static function edit($id){
+		self::check_logged_in();
+
 		$reservation = Reservation::find($id);
 
 		View::make('reservation/edit.html', array('reservation' => $reservation));
 	}
 	public static function update($id){
+		self::check_logged_in();
+
 		$params = $_POST;
 
 
@@ -53,6 +60,7 @@ class ReservationController extends BaseController{
 
 	}
 	public static function store(){
+		self::check_logged_in();
     
     	$params = $_POST;
 
@@ -78,6 +86,8 @@ class ReservationController extends BaseController{
     	
   	}
   	public static function destroy($id){
+		self::check_logged_in();
+
   		$reservation = new Reservation(array('id' => $id));
   		$reservation->destroy();
 

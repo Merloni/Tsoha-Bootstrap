@@ -47,7 +47,7 @@
           </ul>
           {% else %}
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{base_path}}/logout">Kirjaudu ulos</a></li>
+            <li><a href="{{base_path}}/logout">Kirjaudu ulos<i>({{user_logged_in.surname}})</i></a></li>
           </ul>
           {% endif %}
         </div>

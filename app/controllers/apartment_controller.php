@@ -4,6 +4,8 @@
 class ApartmentController extends BaseController{
 
 	public static function index(){
+		self::check_logged_in();
+
 		$apartments = Apartment::all();
 
 		View::make('apartment/index.html', array('apartments' => $apartments));
@@ -25,6 +27,7 @@ class ApartmentController extends BaseController{
 
 
 		if(!$apartment){
+			
 			View::make('apartment/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'loginname' => $params['loginname']));
 		}else{
 			$_SESSION['user'] = $apartment->id;

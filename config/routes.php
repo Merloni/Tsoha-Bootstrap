@@ -18,6 +18,9 @@
   $routes->post('/reservation', function(){
     ReservationController::store();
   });
+  $routes->get('/reservations/own', function(){
+    ReservationController::showallown();
+  });
   $routes->get('/reservation/new', function(){
     ReservationController::create();
   });
@@ -32,6 +35,9 @@
   });
   $routes->post('/reservation/:id/destroy', function($id){
     ReservationController::destroy($id);
+  });
+  $routes->get('/calendar/', function(){
+    ReservationController::calendar();
   });
 
 
@@ -50,3 +56,4 @@
   $routes->get('/logout', function(){
     ApartmentController::logout();
   });
+

@@ -28,6 +28,26 @@ class Reservation extends BaseModel{
 		}
 		return $reservations;
 	}
+	public static function allown(){
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE apartment_id = :apartment_id');
+
+		$query->execute(array('apartment_id' => $_SESSION['user']));
+
+		$rows = $query->fetchAll();
+		$reservations = array();
+		foreach($rows as $row){
+			$reservations[] = new Reservation(array(
+				'id' => $row['id'],
+				'apartment_id' => $row['apartment_id'],
+				'sauna_id' => $row['sauna_id'],
+				'reserved' => $row['reserved'],
+				'reservestart' => $row['reservestart'],
+				'reserve_end' => $row['reserve_end']
+				));
+		}
+		return $reservations;
+
+	}
 	public static function find($id){
 		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE id = :id LIMIT 1');
 

@@ -14,8 +14,7 @@
 
   <form method="post" action="{{base_path}}/reservation">
     <div class="form-group">
-      <label>Apartment id</label>
-      <input type="number" name="apartment_id" class="form-control">
+      <input type="hidden" name="apartment_id" class="form-control" value="{{user_logged_in.id}}">
     </div>
     <div class="form-group">
       <label>Saunan id</label>
@@ -27,12 +26,12 @@
     </div>
     <div class="form-group">
       <label>Varauksen alku</label>
-      <input type="time" name="reservestart" class="form-control">
+      <input type="datetime" name="reservestart" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Varauksen loppu</label>
-      <input type="time" name="reserve_end" class="form-control">
+      <input type="datetime" name="reserve_end" class="form-control">
     </div>
 
     <div class="form-group">

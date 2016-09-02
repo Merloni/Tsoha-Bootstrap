@@ -17,8 +17,8 @@ CREATE TABLE Reservation(
 	apartment_id INTEGER REFERENCES Apartment(id),
 	sauna_id INTEGER REFERENCES Sauna(id),
 	reserved boolean DEFAULT FALSE,
-	reservestart time,
-	reserve_end time
+	reservestart timestamp,
+	reserve_end timestamp
 );
 
 

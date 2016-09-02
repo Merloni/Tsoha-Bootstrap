@@ -11,6 +11,13 @@ class ReservationController extends BaseController{
 		View::make( 'reservation/index.html', array('reservations' => $reservations));
 
 	}
+	public static function showallown(){
+		self::check_logged_in();
+
+		$reservations = Reservation::allown();
+
+		View::make('reservation/index.html', array('reservations' => $reservations));
+	}
 	public static function show($id){
 		self::check_logged_in();
 		$reservation = Reservation::find($id);	
@@ -93,5 +100,9 @@ class ReservationController extends BaseController{
 
   		Redirect::to('/reservation', array('message' => 'Poistettu'));
 
+  	}
+  	public static function calendar(){
+
+  		View::make('calendar.html');
   	}
 }

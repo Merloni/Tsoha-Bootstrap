@@ -1,0 +1,19 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+
+  {% if reservations == null %}
+    <h1>Kaikki ajat vapaana!</h1>
+
+  {% else %}
+
+    <h1>Päivän varatut ajat</h1>
+    {% for reservation in reservations %}
+      <p>{{reservation.reserve_start}} - {{reservation.reserve_end}}</p>
+    {% endfor %}
+
+  {% endif %}
+  
+
+{% endblock %}

@@ -1,13 +1,18 @@
 <?php
 
+  #CalendarRoutes
+  $routes->get('/calendar/', function(){
+    CalendarController::calendar();
+  });
+
   $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+    CalendarController::thisMonth();
   });
 
 #ReservationRoutes
 
   $routes->get('/', function() {
-    ReservationController::index();
+    CalendarController::calendar();
   });
   $routes->get('/reservation', function() {
     ReservationController::index();
@@ -18,11 +23,14 @@
   $routes->post('/reservation', function(){
     ReservationController::store();
   });
+  $routes->get('/reservations/:day', function($day){
+    ReservationController::showday($day);
+  });
   $routes->get('/reservations/own', function(){
     ReservationController::showallown();
   });
-  $routes->get('/reservation/new', function(){
-    ReservationController::create();
+  $routes->get('reservation/new/:day', function($day){
+    ReservationController::create($day);
   });
   $routes->get('/reservation/:id', function($id){
     ReservationController::show($id);
@@ -35,9 +43,6 @@
   });
   $routes->post('/reservation/:id/destroy', function($id){
     ReservationController::destroy($id);
-  });
-  $routes->get('/calendar/', function(){
-    ReservationController::calendar();
   });
 
 

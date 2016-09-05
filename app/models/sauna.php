@@ -2,7 +2,7 @@
 
 class Sauna extends BaseModel{
 
-	public $id, $address, $price;
+	public $id, $name, $address, $price;
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -19,6 +19,7 @@ class Sauna extends BaseModel{
 		foreach($rows as $row){
 			$saunas[] = new Sauna(array(
 				'id' => $row['id'],
+				'name' => $row['name'],
 				'address' => $row['address'],
 				'price' => $row['price']
 				));
@@ -35,6 +36,7 @@ class Sauna extends BaseModel{
 		if($row){
 			$sauna = new Sauna(array(
 				'id'=> $row['id'],
+				'name' => $row['name'],
 				'address' => $row['address'],
 				'price'=> $row['price']
 				));

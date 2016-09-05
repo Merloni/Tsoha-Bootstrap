@@ -2,7 +2,7 @@
 
 class Reservation extends BaseModel{
 
-	public $id, $apartment_id, $sauna_id, $reserved, $reservestart, $reserve_end;
+	public $id, $apartment_id, $sauna_id, $day, $reserve_start, $reserve_end;
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -21,9 +21,28 @@ class Reservation extends BaseModel{
 				'id' => $row['id'],
 				'apartment_id' => $row['apartment_id'],
 				'sauna_id' => $row['sauna_id'],
-				'reserved' => $row['reserved'],
-				'reservestart'=>$row['reservestart'],
+				'day' => $row['day'],
+				'reserve_start'=>$row['reserve_start'],
 				'reserve_end'=>$row['reserve_end']
+				));
+		}
+		return $reservations;
+	}
+	public static function allwithday($day){
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day');
+
+		$query->execute(array('day' => $day));
+
+		$rows = $query->fetchAll();
+		$reservations = array();
+		foreach($rows as $row){
+			$reservations[] = new Reservation(array(
+				'id' => $row['id'],
+				'apartment_id' => $row['apartment_id'],
+				'sauna_id' => $row['sauna_id'],
+				'day' => $row['day'],
+				'reserve_start' => $row['reserve_start'],
+				'reserve_end' => $row['reserve_end']
 				));
 		}
 		return $reservations;
@@ -40,8 +59,8 @@ class Reservation extends BaseModel{
 				'id' => $row['id'],
 				'apartment_id' => $row['apartment_id'],
 				'sauna_id' => $row['sauna_id'],
-				'reserved' => $row['reserved'],
-				'reservestart' => $row['reservestart'],
+				'day' => $row['day'],
+				'reserve_start' => $row['reserve_start'],
 				'reserve_end' => $row['reserve_end']
 				));
 		}
@@ -60,8 +79,8 @@ class Reservation extends BaseModel{
 				'id'=> $row['id'],
 				'apartment_id'=> $row['apartment_id'],
 				'sauna_id'=> $row['sauna_id'],
-				'reserved'=> $row['reserved'],
-				'reservestart'=>$row['reservestart'],
+				'day' => $row['day'],
+				'reserve_start'=>$row['reserve_start'],
 				'reserve_end'=>$row['reserve_end']
 				));
 
@@ -72,9 +91,9 @@ class Reservation extends BaseModel{
 
 	public function save(){
 
-    	$query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, sauna_id, reserved, reservestart, reserve_end) VALUES (:apartment_id, :sauna_id, :reserved, :reservestart, :reserve_end) RETURNING id');
+    	$query = DB::connection()->prepare('INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (:apartment_id, :sauna_id, :day, :reserve_start, :reserve_end) RETURNING id');
 
-    	$query->execute(array('apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
+    	$query->execute(array('apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'day' => $this->day, 'reserve_start' => $this->reserve_start, 'reserve_end' => $this->reserve_end));
 
     	$row = $query->fetch();
     
@@ -83,9 +102,10 @@ class Reservation extends BaseModel{
   	}
   	public function update(){
 
-  		$query = DB::connection()->prepare('UPDATE Reservation SET apartment_id = :apartment_id, sauna_id = :sauna_id, reserved = :reserved, reservestart = :reservestart, reserve_end = :reserve_end WHERE id = :id RETURNING id');
+  		$query = DB::connection()->prepare('UPDATE Reservation SET apartment_id = :apartment_id, sauna_id = :sauna_id,
+  			day = :day, reserve_start = :reserve_start, reserve_end = :reserve_end WHERE id = :id RETURNING id');
 
-      $query->execute(array('id' => $this->id, 'apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'reserved' => $this->reserved, 'reservestart' => $this->reservestart, 'reserve_end' => $this->reserve_end));
+      $query->execute(array('id' => $this->id, 'apartment_id' => $this->apartment_id, 'sauna_id' => $this->sauna_id, 'day' => $this->day, 'reserve_start' => $this->reserve_start, 'reserve_end' => $this->reserve_end));
 
       $row = $query->fetch();
     
@@ -100,37 +120,18 @@ class Reservation extends BaseModel{
 
 
   	}
-  	public function reservedtostring(){
-  		if ($this->reserved){
-  			return "Varattu";
-  		} else {
-  			return "Vapaa";
-  		}
-  	}
   	public function validate_start_and_endtime(){
   		$errors = array();
-  		if($this->reservestart == '' || $this->reserve_end == '' || $this->reservestart == null || $this->reserve_end == null){
+  		if($this->reserve_start == '' || $this->reserve_end == '' || $this->reserve_start == null || $this->reserve_end == null){
   			$errors[] = 'Varauksella on oltava alku -ja loppuaika';
 
   		}
 
-  		if ($this->reservestart > $this->reserve_end){
+  		if ($this->reserve_start > $this->reserve_end){
   			$errors[] = 'Alkuajan on oltava ennen loppuaikaa';
   		}
   		return $errors;
 
   	}
-  	public function validate_sauna_id(){
-  		$errors = array();
-  		if($this->sauna_id == '' || $this->sauna_id == null){
-  			$errors[] = 'Sauna id ei voi olla tyhjä';
-  		}
-  		if(is_numeric($this->sauna_id) == 0){
-  			$errors[] = 'Sauna id on oltava numero';
-  		}
-  	}
-
-
-	
 
 }

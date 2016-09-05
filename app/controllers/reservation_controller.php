@@ -6,9 +6,10 @@ class ReservationController extends BaseController{
 	public static function index(){
 		self::check_logged_in();
 
+		$saunas = Sauna::all();
 		$reservations = Reservation::all();
 
-		View::make( 'reservation/index.html', array('reservations' => $reservations));
+		View::make( 'reservation/index.html', array('reservations' => $reservations, 'saunas' => $saunas));
 
 	}
 	public static function showallown(){
@@ -27,10 +28,11 @@ class ReservationController extends BaseController{
 
 		View::make('reservation/show.html', compact('reservation', 'apartment'));
 	}
-	public static function create(){
+	public static function create($day){
 		self::check_logged_in();
 
-		View::make('reservation/new.html');
+		$saunas = Sauna::all();
+		View::make('reservation/new.html', array('saunas' => $saunas, 'day' => $day));
 
 	}
 	public static function edit($id){
@@ -50,7 +52,7 @@ class ReservationController extends BaseController{
 			'id' => $id,
 			'apartment_id' => $params['apartment_id'],
 			'sauna_id' =>  $params['sauna_id'],
-			'reserved' => $params['reserved'],
+			'day' => $params['day'],
 			'reservestart' => $params['reservestart'],
 			'reserve_end' => $params['reserve_end']
 		);
@@ -74,8 +76,8 @@ class ReservationController extends BaseController{
     	$attributes = array(
       		'apartment_id' => $params['apartment_id'],
       		'sauna_id' => $params['sauna_id'],
-      		'reserved' => $params['reserved'],
-      		'reservestart' => $params['reservestart'],
+      		'day' => $params['day'],
+      		'reserve_start' => $params['reserve_start'],
       		'reserve_end' => $params['reserve_end']
     	);
     	$reservation = New Reservation($attributes);
@@ -101,8 +103,12 @@ class ReservationController extends BaseController{
   		Redirect::to('/reservation', array('message' => 'Poistettu'));
 
   	}
-  	public static function calendar(){
+  	public static function showday($day){
+  		self::check_logged_in();
 
-  		View::make('calendar.html');
+  		$reservations = Reservation::allwithday($day);
+  		View::make('reservation/dayview.html', array('reservations' => $reservations));
+
   	}
+
 }

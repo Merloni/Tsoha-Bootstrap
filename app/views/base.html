@@ -39,10 +39,10 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}/reservations">Etusivu</a></li>
+            <li><a href="{{base_path}}/">Etusivu</a></li>
             {% if user_logged_in %}
-            <li><a href="{{base_path}}/reservation/new">Uusi varaus</a></li>
-            <li><a href="{{base_path}}/apartments">Käyttäjät (poistan tämän, mutta for now)</a></li>
+            <li><a href="{{base_path}}/calendar">Varauskalenteriin</a></li>
+            <li><a href="{{base_path}}/reservations/own">Omiin varauksiin</a></li>
             {% endif %}
           </ul>
           {% if user_logged_in == false %}

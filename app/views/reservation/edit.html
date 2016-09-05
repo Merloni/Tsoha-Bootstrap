@@ -15,20 +15,24 @@
 
   <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/edit">
     <div class="form-group">
-      <label>Apartment id</label>
-      <input type="number" name="apartment_id" class="form-control" value="{{reservation.apartment_id}}">
+      <input type="hidden" name="apartment_id" class="form-control" value="{{reservation.apartment_id}}">
     </div>
     <div class="form-group">
-      <label>Saunan id</label>
-      <input type="number" name="sauna_id" class="form-control" value="{{reservation.sauna_id}}">
-    </div>
+      <label>Sauna</label>
+      <select class="form-control" name="sauna_id" value="{{reservation.sauna-id}}">
+        {% for sauna in saunas %}
+          <option  value="{{sauna.id}}"><b>{{sauna.name}}</b>, {{sauna.address}}</option>
+        {% endfor %}
+      </select>
+      
+    </div> 
     <div class="form-group">
-      <label>Varattu(turha ominaisuus, muutan myöhemmin) </label>
-      <input type="boolean" name="reserved" class="form-control" value="{{reservation.reserved}}">
+      <label>Päivä</label>
+      <input type="time" name="day" class="form-control" value="{{reservation.day}}">
     </div>
     <div class="form-group">
       <label>Varauksen alku</label>
-      <input type="time" name="reservestart" class="form-control" value="{{reservation.reservestart}}">
+      <input type="time" name="reserve_start" class="form-control" value="{{reservation.reserve_start}}">
     </div>
     <div class="form-group">
       <label>Varauksen loppu</label>

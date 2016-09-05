@@ -17,21 +17,25 @@
       <input type="hidden" name="apartment_id" class="form-control" value="{{user_logged_in.id}}">
     </div>
     <div class="form-group">
-      <label>Saunan id</label>
-      <input type="number" name="sauna_id" class="form-control">
+      <label>Sauna</label>
+      <select class="form-control" name="sauna_id">
+        {% for sauna in saunas %}
+          <option  value="{{sauna.id}}"><b>{{sauna.name}}</b>, {{sauna.address}}</option>
+        {% endfor %}
+      </select>
+      
     </div>
     <div class="form-group">
-      <label>Varattu(turha ominaisuus, muutan myöhemmin) </label>
-      <input type="boolean" name="reserved" class="form-control">
+      <input type="hidden" name="day" class="form-control" value="25">
     </div>
     <div class="form-group">
       <label>Varauksen alku</label>
-      <input type="datetime" name="reservestart" class="form-control">
+      <input type="time" step="1" name="reserve_start" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Varauksen loppu</label>
-      <input type="datetime" name="reserve_end" class="form-control">
+      <input type="time" step="1" name="reserve_end" class="form-control">
     </div>
 
     <div class="form-group">

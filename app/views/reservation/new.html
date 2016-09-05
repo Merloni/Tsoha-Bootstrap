@@ -11,7 +11,32 @@
       </ul>
     </div>
   {% endif %}
+  <br>
+    <h3>{{day}}</h3>
+    <br>
+    {% if reservations == null %}
+    
+    {% else %}
 
+    <h4>Jo varatut ajat:</h4>
+    <br>
+    <ul>
+
+  {% for reservation in reservations %}
+      <li>{{reservation.reserve_start}} - {{reservation.reserve_end}},  
+      {% for sauna in saunas %}
+          {% if sauna.id == reservation.sauna_id %}
+            {{sauna.name}}
+          {% endif %}
+      {% endfor %}
+      </li>
+
+    {% endfor %}
+    
+    {% endif %}
+    
+
+    </ul>
   <form method="post" action="{{base_path}}/reservation">
     <div class="form-group">
       <input type="hidden" name="apartment_id" class="form-control" value="{{user_logged_in.id}}">
@@ -26,16 +51,16 @@
       
     </div>
     <div class="form-group">
-      <input type="hidden" name="day" class="form-control" value="25">
+      <input type="hidden" name="day" class="form-control" value="{{day}}">
     </div>
     <div class="form-group">
       <label>Varauksen alku</label>
-      <input type="time" step="1" name="reserve_start" class="form-control">
+      <input type="time" step="1" name="reserve_start" class="form-control" value="{{reservation_start}}">
     </div>
 
     <div class="form-group">
       <label>Varauksen loppu</label>
-      <input type="time" step="1" name="reserve_end" class="form-control">
+      <input type="time" step="1" name="reserve_end" class="form-control" value="{{reservation_end}}">
     </div>
 
     <div class="form-group">

@@ -6,7 +6,7 @@ class Reservation extends BaseModel{
 
 	public function __construct($attributes){
 		parent::__construct($attributes);
-		$this->validators = array('validate_start_and_endtime');
+		$this->validators = array('validate_start_and_endtime', 'validate_sauna');
 	}
 	public static function all(){
 		$query = DB::connection()->prepare('SELECT * FROM Reservation');
@@ -132,6 +132,26 @@ class Reservation extends BaseModel{
   		}
   		return $errors;
 
+  	}
+  	public function validate_sauna(){
+  		$errors = array();
+  		$reservations = Reservation::allwithday($this->day);
+
+  		foreach($reservations as $res){
+  			if($res->sauna_id == $this->sauna_id){
+  				if($this->reserve_start < $res->reserve_start && $this->reserve_end > $res->reserve_start){
+  					$errors[] = "Päällekkäinen varaus";
+  				} else if ($this->reserve_start < $res->reserve_end && $this->reserve_end > $res->reserve_start){
+  					$errors[] = "Päällekkäinen varaus";
+
+  				} else if ($this->reserve_end > $res->reserve_end && $this->reserve_start < $res->reserve_end){
+  					$errors[] = "Päällekkäinen varaus";
+  				}
+
+  			}
+  		}
+  		
+  		return $errors;
   	}
 
 }

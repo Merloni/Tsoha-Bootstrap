@@ -16,23 +16,25 @@ class ReservationController extends BaseController{
 		self::check_logged_in();
 
 		$reservations = Reservation::allown();
+		$saunas = Sauna::all();
 
-		View::make('reservation/index.html', array('reservations' => $reservations));
+		View::make('reservation/index.html', array('reservations' => $reservations, 'saunas' => $saunas));
 	}
 	public static function show($id){
 		self::check_logged_in();
 		$reservation = Reservation::find($id);	
+		$saunas = Sauna::all();
 		
 
-		$apartment = Apartment::find($reservation->apartment_id);
-
-		View::make('reservation/show.html', compact('reservation', 'apartment'));
+		View::make('reservation/show.html', array('reservation' => $reservation, 'saunas' => $saunas));
 	}
 	public static function create($day){
 		self::check_logged_in();
 
+
+		$reservations = Reservation::allwithday($day);
 		$saunas = Sauna::all();
-		View::make('reservation/new.html', array('saunas' => $saunas, 'day' => $day));
+		View::make('reservation/new.html', array('saunas' => $saunas, 'reservations' => $reservations, 'day' => $day));
 
 	}
 	public static function edit($id){
@@ -81,14 +83,16 @@ class ReservationController extends BaseController{
       		'reserve_end' => $params['reserve_end']
     	);
     	$reservation = New Reservation($attributes);
-
     	$errors = $reservation->errors();
 
     	if (count($errors) == 0) {
     		$reservation->save();
     		Redirect::to('/reservation/' . $reservation->id, array('message' => 'Varaus tehty!'));
     	}else{
-    		View::make('reservation/new.html', array('errors' => $errors, 'attributes' => $attributes));
+    		$reservations = Reservation::allwithday($reservation->day);
+    		$saunas = Sauna::all();
+    		View::make('/reservation/new.html', array('errors' => $errors, 'attributes' => $attributes, 'saunas' => $saunas, 'reservations' => $reservations, 'day' => $reservation->day));
+
   		}
 
     
@@ -106,8 +110,9 @@ class ReservationController extends BaseController{
   	public static function showday($day){
   		self::check_logged_in();
 
+  		$saunas = Sauna::all();
   		$reservations = Reservation::allwithday($day);
-  		View::make('reservation/dayview.html', array('reservations' => $reservations));
+  		View::make('reservation/dayview.html', array('reservations' => $reservations, 'day' => $day, 'saunas' => $saunas));
 
   	}
 

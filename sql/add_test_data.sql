@@ -10,6 +10,6 @@ INSERT INTO Sauna (address, name, price) VALUES('Hermannikermanninkatu 1','Sauna
 INSERT INTO Sauna (address, name, price) VALUES('Leppäsuonkatu 13','The basement',  100);
 INSERT INTO Sauna (address, name, price) VALUES('Gustaf Hellströmin katu 13','Iida', 0);
 
-INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (2, 1, 25, '09:00:00', '11:00:00');
-INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (1, 2, 24, '09:00:00', '12:00:00');
-INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (3, 2, 23, '08:00:00', '09:00:00');
+INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (2, 1, '05-09-2016', '09:00:00', '11:00:00');
+INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (1, 2, '06-09-2016', '09:00:00', '12:00:00');
+INSERT INTO Reservation (apartment_id, sauna_id, day, reserve_start, reserve_end) VALUES (3, 2, '07-09-2016', '08:00:00', '09:00:00');

@@ -9,11 +9,23 @@
   {% else %}
 
     <h1>Päivän varatut ajat</h1>
+    <ul>
     {% for reservation in reservations %}
-      <p>{{reservation.reserve_start}} - {{reservation.reserve_end}}</p>
+      <li>{{reservation.reserve_start}} - {{reservation.reserve_end}}, 
+      {% for sauna in saunas %}
+        {% if sauna.id == reservation.sauna_id %}
+        {{sauna.name}}
+        {% endif %}
+      {% endfor %}
+      </li>
     {% endfor %}
-
+</ul>
   {% endif %}
+
+
+  <p>
+    <a href="{{base_path}}/reservation/new/{{day}}" class="btn btn-success">Varaa aika</a>
+  </p>
   
 
 {% endblock %}

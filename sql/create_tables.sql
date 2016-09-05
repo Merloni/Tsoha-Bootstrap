@@ -17,7 +17,7 @@ CREATE TABLE Reservation(
 	id SERIAL PRIMARY KEY,
 	apartment_id INTEGER REFERENCES Apartment(id),
 	sauna_id INTEGER REFERENCES Sauna(id),
-	day INTEGER NOT NULL,
+	day DATE NOT NULL,
 	reserve_start TIME,
 	reserve_end TIME
 );

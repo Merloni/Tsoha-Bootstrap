@@ -6,8 +6,7 @@
 <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        <th>Huoneiston id</th>
-        <th>Saunan id</th>
+        <th>Sauna</th>
         <th>Päivä</th>
         <th>Varauksen alkuaika</th>
         <th>Varauksen loppaika</th>
@@ -16,8 +15,12 @@
 
     <tbody>
         <tr>
-          <td>{{reservation.apartment_id}}</td>
-          <td>{{reservation.sauna_id}}</td>
+        {% for sauna in saunas %}
+          {% if sauna.id == reservation.sauna_id %}
+            <td>{{sauna.name}}</td>
+          {% endif %}
+
+        {% endfor %}
           <td>{{reservation.day}}</td>
           <td>{{reservation.reserve_start}}</td>
           <td>{{reservation.reserve_end}}</td>

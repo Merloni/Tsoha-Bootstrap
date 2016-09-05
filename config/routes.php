@@ -9,6 +9,10 @@
     CalendarController::thisMonth();
   });
 
+  $routes->get('/naytakaikki', function(){
+    ReservationController::index();
+  });
+
 #ReservationRoutes
 
   $routes->get('/', function() {
@@ -23,14 +27,14 @@
   $routes->post('/reservation', function(){
     ReservationController::store();
   });
+  $routes->get('/reservation/new/:day', function($day){
+    ReservationController::create($day);
+  });
   $routes->get('/reservations/:day', function($day){
     ReservationController::showday($day);
   });
-  $routes->get('/reservations/own', function(){
+  $routes->get('/ownreservations', function(){
     ReservationController::showallown();
-  });
-  $routes->get('reservation/new/:day', function($day){
-    ReservationController::create($day);
   });
   $routes->get('/reservation/:id', function($id){
     ReservationController::show($id);

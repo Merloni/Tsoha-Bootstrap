@@ -12,6 +12,9 @@ class ReservationController extends BaseController{
 		View::make( 'reservation/index.html', array('reservations' => $reservations, 'saunas' => $saunas));
 
 	}
+	public static function frontpage(){
+		View::make('frontpage.html');
+	}
 	public static function showallown(){
 		self::check_logged_in();
 

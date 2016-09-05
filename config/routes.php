@@ -16,7 +16,7 @@
 #ReservationRoutes
 
   $routes->get('/', function() {
-    CalendarController::calendar();
+    ReservationController::frontpage();
   });
   $routes->get('/reservation', function() {
     ReservationController::index();

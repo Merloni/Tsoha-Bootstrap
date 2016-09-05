@@ -1,0 +1,22 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Saunavarausapp!</h1>
+
+
+
+<p>Saunavarausapp toimii siten, että yläpalkista valittavasta kalenterista valitset päivän, jota painamalla voit varata saunavuoroja eri saunoista valitsemallesi päivälle.</p>
+<br>
+<p>Alla olevia nappeja painamalla voit viel tutkailla sellaisia tietoja, jotka piilotan jahka lisään toiminnallisuutta appille. Napit näkyvät vain jos olet kirjautunut sisään.</p>
+
+<p>Navbarissa tällä hetkellä näkyy ei-kirjautuneille käyttäjille kirjautumismahdollisuus ja kirjautuneille käyttäjille muutama muu ominaisuus. Kirjautumiseen voi käyttää seuraavia tunnuksia: <strong>username:A1 password:Kalle123</strong></p>
+{% if user_logged_in %}
+  <p>
+    <a href="{{base_path}}/naytakaikki" class="btn btn-success">Katso kaikkia varauksia</a>
+    <a href="{{base_path}}/apartments" class="btn btn-success">Listatut käyttäjät</a>
+  </p>
+{% endif %}
+
+{% endblock %}

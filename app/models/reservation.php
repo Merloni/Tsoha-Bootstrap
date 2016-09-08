@@ -9,7 +9,7 @@ class Reservation extends BaseModel{
 		$this->validators = array('validate_start_and_endtime', 'validate_sauna');
 	}
 	public static function all(){
-		$query = DB::connection()->prepare('SELECT * FROM Reservation');
+		$query = DB::connection()->prepare('SELECT * FROM Reservation ORDER BY day, reserve_start');
 
 		$query->execute();
 
@@ -29,7 +29,7 @@ class Reservation extends BaseModel{
 		return $reservations;
 	}
 	public static function allwithday($day){
-		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day');
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day ORDER BY day, reserve_start');
 
 		$query->execute(array('day' => $day));
 
@@ -48,7 +48,7 @@ class Reservation extends BaseModel{
 		return $reservations;
 	}
 	public static function allown(){
-		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE apartment_id = :apartment_id');
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE apartment_id = :apartment_id ORDER BY day, reserve_start');
 
 		$query->execute(array('apartment_id' => $_SESSION['user']));
 
@@ -126,7 +126,6 @@ class Reservation extends BaseModel{
   			$errors[] = 'Varauksella on oltava alku -ja loppuaika';
 
   		}
-
   		if ($this->reserve_start > $this->reserve_end){
   			$errors[] = 'Alkuajan on oltava ennen loppuaikaa';
   		}
@@ -138,20 +137,22 @@ class Reservation extends BaseModel{
   		$reservations = Reservation::allwithday($this->day);
 
   		foreach($reservations as $res){
-  			if($res->sauna_id == $this->sauna_id){
-  				if($this->reserve_start < $res->reserve_start && $this->reserve_end > $res->reserve_start){
-  					$errors[] = "Päällekkäinen varaus";
-  				} else if ($this->reserve_start < $res->reserve_end && $this->reserve_end > $res->reserve_start){
-  					$errors[] = "Päällekkäinen varaus";
 
-  				} else if ($this->reserve_end > $res->reserve_end && $this->reserve_start < $res->reserve_end){
+  			if($res->sauna_id == $this->sauna_id){
+  				$r_start =  substr($res->reserve_start, 0, 5);
+  				$r_end = substr($res->reserve_end, 0, 5);
+  				if($r_start <= $this->reserve_start && $r_end > $this->reserve_start){
+  					$errors[] = "Päällekkäinen varaus";
+  				} else if ($r_start >= $this->reserve_start && $r_end <= $this->reserve_end){
+  					$errors[] = "Päällekkäinen varaus";
+  				} else if ($r_end >= $this->reserve_end && $r_start < $this->reserve_end){
   					$errors[] = "Päällekkäinen varaus";
   				}
-
   			}
-  		}
   		
+  		}
+
   		return $errors;
-  	}
+  }
 
 }

@@ -44,8 +44,9 @@ class ReservationController extends BaseController{
 		self::check_logged_in();
 
 		$reservation = Reservation::find($id);
+		$saunas = Sauna::all();
 
-		View::make('reservation/edit.html', array('reservation' => $reservation));
+		View::make('reservation/edit.html', array('reservation' => $reservation, 'saunas' => $saunas));
 	}
 	public static function update($id){
 		self::check_logged_in();
@@ -58,14 +59,15 @@ class ReservationController extends BaseController{
 			'apartment_id' => $params['apartment_id'],
 			'sauna_id' =>  $params['sauna_id'],
 			'day' => $params['day'],
-			'reservestart' => $params['reservestart'],
+			'reserve_start' => $params['reserve_start'],
 			'reserve_end' => $params['reserve_end']
 		);
 
 		$reservation = new Reservation($attributes);
 		$errors = $reservation->errors();
 		if(count($errors) > 0){
-			View::make('reservation/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+			$saunas = Sauna::all();
+			View::make('reservation/edit.html', array('errors' => $errors, 'reservation' => $reservation, 'saunas' => $saunas));
 		}else{
 			$reservation ->update();
 			Redirect::to('/reservation/' . $reservation->id, array('message' => 'Muokattu onnistuneesti'));
@@ -94,8 +96,7 @@ class ReservationController extends BaseController{
     	}else{
     		$reservations = Reservation::allwithday($reservation->day);
     		$saunas = Sauna::all();
-    		View::make('/reservation/new.html', array('errors' => $errors, 'attributes' => $attributes, 'saunas' => $saunas, 'reservations' => $reservations, 'day' => $reservation->day));
-
+    		View::make('/reservation/new.html', array('errors' => $errors, 'reservation' => $reservation, 'saunas' => $saunas, 'reservations' => $reservations, 'day' => $reservation->day));
   		}
 
     

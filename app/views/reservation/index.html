@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% import "macros/forms.html" as forms %}
 
 
 {% block content %}
@@ -15,6 +16,8 @@
         <th>Päivä</th>
         <th>Varauksen alkuaika</th>
         <th>Varauksen loppaika</th>
+        <th>Muokkaa</th>
+        <th>Poista</th>
       </tr>
     </thead>
 
@@ -29,9 +32,13 @@
           <td>{{reservation.day}}</td>
           <td>{{reservation.reserve_start}}</td>
           <td>{{reservation.reserve_end}}</td>
+          {% if user_logged_in %}
+          <td>{{forms.get_button("#{base_path}/reservation/#{reservation.id}/edit")}}</td>
+          <td>{{forms.post_button("#{base_path}/reservation/#{reservation.id}/destroy")}}</td>
+          {% endif %}
         </tr>
+
       {% endfor %}
     </tbody>
   </table>
-  {{forms}}
 {% endblock %}

@@ -12,35 +12,34 @@
       </ul>
     </div>
   {% endif %}
-
-  <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/edit">
+   <form method="post" action="{{base_path}}/reservation/{{reservation.id}}/edit">
     <div class="form-group">
-      <input type="hidden" name="apartment_id" class="form-control" value="{{reservation.apartment_id}}">
+      <input type="hidden" name="apartment_id" class="form-control" value="{{user_logged_in.id}}">
     </div>
     <div class="form-group">
       <label>Sauna</label>
-      <select class="form-control" name="sauna_id" value="{{reservation.sauna-id}}">
+      <select class="form-control" name="sauna_id">
         {% for sauna in saunas %}
           <option  value="{{sauna.id}}"><b>{{sauna.name}}</b>, {{sauna.address}}</option>
         {% endfor %}
       </select>
       
-    </div> 
+    </div>
     <div class="form-group">
-      <label>Päivä</label>
-      <input type="time" name="day" class="form-control" value="{{reservation.day}}">
+      <input type="hidden" name="day" class="form-control" value="{{reservation.day}}">
     </div>
     <div class="form-group">
       <label>Varauksen alku</label>
-      <input type="time" name="reserve_start" class="form-control" value="{{reservation.reserve_start}}">
+      <input type="time" step="60" name="reserve_start" class="form-control" value="{{reservation.reserve_start}}">
     </div>
+
     <div class="form-group">
       <label>Varauksen loppu</label>
-      <input type="time" name="reserve_end" class="form-control" value="{{reservation.reserve_end}}">
+      <input type="time" step="60" name="reserve_end" class="form-control" value="{{reservation.reserve_end}}">
     </div>
+
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-    
   </form>
 {% endblock %}

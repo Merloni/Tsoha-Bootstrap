@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% import "macros/forms.html" as forms %}
+<h1>Yksittäisen saunan sivu</h1>
+<table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Osoite</th>
+        <th>Hinta</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td>{{sauna.name}}</td>
+          <td>{{sauna.address}}</td>
+          <td>{{sauna.price}}
+        </tr>
+    </tbody>
+  </table>
+    {{forms.get_button("#{base_path}/sauna/#{sauna.id}/edit")}}
+    {{forms.post_button("#{base_path}/sauna/#{sauna.id}/destroy")}}
+</form>
+
+
+{% endblock %} 

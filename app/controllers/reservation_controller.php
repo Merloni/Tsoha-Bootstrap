@@ -43,10 +43,18 @@ class ReservationController extends BaseController{
 	public static function edit($id){
 		self::check_logged_in();
 
-		$reservation = Reservation::find($id);
-		$saunas = Sauna::all();
 
-		View::make('reservation/edit.html', array('reservation' => $reservation, 'saunas' => $saunas));
+		if (Reservation::find($id)){
+			$reservation = Reservation::find($id);
+			$saunas = Sauna::all();
+
+			View::make('reservation/edit.html', array('reservation' => $reservation, 'saunas' => $saunas));
+
+		}else{
+			Redirect::to('/reservation', array('message' => 'Virheellinen ID'));
+
+		}
+		
 	}
 	public static function update($id){
 		self::check_logged_in();

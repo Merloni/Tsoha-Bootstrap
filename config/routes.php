@@ -65,4 +65,33 @@
   $routes->get('/logout', function(){
     ApartmentController::logout();
   });
+  $routes->get('/register', function(){
+    ApartmentController::create();
+  });
+  $routes->post('/register', function(){
+    ApartmentController::store();
+  });
 
+  #SaunaRoutes
+
+  $routes->get('/saunas', function(){
+    SaunaController::index();
+  });
+  $routes->get('/sauna/new', function(){
+    SaunaController::create();
+  });
+  $routes->get('/sauna/:id', function($id){
+    SaunaController::show($id);
+  });
+  $routes->post('/sauna', function(){
+    SaunaController::store();
+  });
+  $routes->get('/sauna/:id/edit', function($id){
+    SaunaController::edit($id);
+  });
+  $routes->post('/sauna/:id/edit', function($id){
+    SaunaController::update($id);
+  });
+  $routes->post('/sauna/:id/destroy', function($id){
+    SaunaController::destroy($id);
+  });

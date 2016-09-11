@@ -29,9 +29,28 @@ class Reservation extends BaseModel{
 		return $reservations;
 	}
 	public static function allwithday($day){
-		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day ORDER BY day, reserve_start');
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day ORDER BY reserve_start');
 
 		$query->execute(array('day' => $day));
+
+		$rows = $query->fetchAll();
+		$reservations = array();
+		foreach($rows as $row){
+			$reservations[] = new Reservation(array(
+				'id' => $row['id'],
+				'apartment_id' => $row['apartment_id'],
+				'sauna_id' => $row['sauna_id'],
+				'day' => $row['day'],
+				'reserve_start' => $row['reserve_start'],
+				'reserve_end' => $row['reserve_end']
+				));
+		}
+		return $reservations;
+	}
+	public static function allondaybutone($day, $id){
+		$query = DB::connection()->prepare('SELECT * FROM Reservation WHERE day = :day AND id <> :id ORDER BY reserve_start');
+
+		$query->execute(array('day' => $day, 'id' => $id));
 
 		$rows = $query->fetchAll();
 		$reservations = array();
@@ -134,13 +153,14 @@ class Reservation extends BaseModel{
   	}
   	public function validate_sauna(){
   		$errors = array();
-  		$reservations = Reservation::allwithday($this->day);
+  		$reservations = Reservation::allondaybutone($this->day, $this->id);
 
   		foreach($reservations as $res){
 
   			if($res->sauna_id == $this->sauna_id){
   				$r_start =  substr($res->reserve_start, 0, 5);
   				$r_end = substr($res->reserve_end, 0, 5);
+
   				if($r_start <= $this->reserve_start && $r_end > $this->reserve_start){
   					$errors[] = "Päällekkäinen varaus";
   				} else if ($r_start >= $this->reserve_start && $r_end <= $this->reserve_end){
